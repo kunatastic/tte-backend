@@ -4,7 +4,7 @@
   "description": "backend for the tte-app",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p . && cp -rv src/docs/ dist/docs/",
     "clean": "rm -rf dist",
     "devStart": "nodemon src/index.ts",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
