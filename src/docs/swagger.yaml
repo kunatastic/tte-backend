@@ -1,0 +1,138 @@
+swagger: "2.0"
+info:
+  description: "This is the api documentation of the TTE server.   For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0.0"
+  title: "TTE Backend"
+host: "localhost:5000"
+basePath: "/api"
+tags:
+- name: "/"
+  description: "Demo route to check the availability"
+- name: "/auth"
+  description: "Authetication Routes"
+- name: "/user"
+  description: "`UNDER DEV`Operations about user"
+- name: "/background"
+  description: "`UNDER DEV` Operations about the background tasks"
+
+schemes:
+- "http"
+
+paths:
+# DEMO ROUTE
+  /:
+    get:
+      tags:
+      - "/"
+      summary: "Check if the server is running. ;p"
+      description: "Should return an object with hello world if everything is working all right"
+      operationId: "check"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successful"
+        "400":
+          description: "Bad Request"
+
+# AUTH ROUTES
+  /auth/signIn:
+    post: 
+      tags:
+      - "/auth"
+      summary: "SignIn the user"
+      description: "Signin the user"
+      operationId: "signin-user"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            email:
+              type: "string"
+              description: "User email"
+            password:
+              type: "string"
+              description: "User password"
+      responses:
+        "200":
+          description: "Sucessful"
+        "400":
+          description: "Bad Request"
+  /auth/signUp:
+    post: 
+      tags:
+      - "/auth"
+      summary: "SignUp the user"
+      description: "Signup the user"
+      operationId: "signup-user"
+      produces:
+      - "application/json"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            email:
+              type: "string"
+              description: "User email"
+            password:
+              type: "string"
+              description: "User password"
+            employeeId:
+              type: "string"
+              description: "User employeeId"
+              required: true
+      responses:
+        "200":
+          description: "Sucessful"
+        "400":
+          description: "Bad Request"
+  /auth/logout:
+    get: 
+      tags:
+      - "/auth"
+      summary: "Logout the user"
+      description: "Logout the user"
+      operationId: "logout-user"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Sucessful"
+        "400":
+          description: "Bad Request"
+
+  /auth/isSignedIn:
+    get: 
+      tags:
+      - "/auth"
+      summary: "is user signed in"
+      description: "is user signed in"
+      operationId: "is-user-signed-in"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Sucessful"
+        "400":
+          description: "Bad Request"
+
+  # SECURITY
+securityDefinitions:
+  myCookie:
+    type: apiKey
+    name: token
+    in: cookie
