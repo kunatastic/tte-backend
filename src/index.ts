@@ -49,9 +49,9 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(loadYaml())); // please keep /api-docs above helmet
 app.use(helmet());
 app.use('/api', rootRouter);
-app.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(loadYaml()));
 
 /**
  * INITIALIZE SERVER
